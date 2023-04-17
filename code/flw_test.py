@@ -45,7 +45,7 @@ def flw_test(test_case: str) -> None:
                         himmelblau,  # himmelblau is only defined for 2D
                         ]
     
-            # optimise each problem, print results for a number of reps
+            # Optimise each problem, print results for a number of reps
             for problem in problems:
                 for _ in range(nreps):
                     flw = FLW_Real(fcost=problem) 
@@ -61,9 +61,9 @@ def flw_test(test_case: str) -> None:
                 flw.optimise()
                 flw.summary()
     
-        # higher-dimension experiments
+        # Higher-dimension experiments
         case "HD":
-             # Adjust these settings at your preference
+             # Adjust these settings to your preference
             nreps = 5              # Number of repetitions per problem
             d = 10                 # Dimensions for search space (must be even!)
             max_evals = 10000 * d  # Maximum number of evaluations
@@ -95,10 +95,10 @@ def flw_test(test_case: str) -> None:
                     flw.optimise()
                     flw.summary()
                     
-        # otherwise use parameter as problem and perform visualization
+        # Otherwise use parameter as problem and perform visualization
         case _:
             flw = FLW_Real(fcost=eval(test_case), 
-                           max_evals=5000, 
+                           max_evals=2000, 
                            viz=True, hist=True) 
             flw.optimise()
             flw.summary()

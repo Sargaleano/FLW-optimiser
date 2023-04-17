@@ -191,7 +191,7 @@ class FLW_Real():
         the leader. The movement update is proportional to a random factor times
         the distance of the agent and the leader along each coordinate axis.
         """
-        # iterate over each follower (len(X) is the number of followers)
+        # Iterate over each follower (len(X) is the number of followers)
         for i in range(len(X)):  
             # iterate over each coordinate
             for j in range(self.d):  
@@ -199,7 +199,7 @@ class FLW_Real():
                 X[i, j] = np.clip(X[i, j] + (3 * np.random.rand() * (deltax)), self.LB[j], self.UB[j])
         
         
-        # update the cost function value for all followers
+        # Update the cost function value for all followers
         F = self.evaluate(X)         
         return X, F
 
@@ -237,7 +237,7 @@ class FLW_Real():
         """
         F = np.zeros(len(X))
 
-        # iterate over each walker (len(X) is the number of walkers)
+        # Iterate over each walker (len(X) is the number of walkers)
         for i in range(len(X)):
             # Choose one random coordinate to update
             j = np.random.choice(self.d)  
@@ -248,10 +248,10 @@ class FLW_Real():
             X[i, j] = np.clip((X[i, j] + self.sigmas[winner] * np.random.randn()), self.LB[j], self.UB[j])
             # X[i, j] = np.clip((X[i, j] + self.sigmas[winner] * self.randLevy(1.9)), self.LB[j], self.UB[j])
             
-            # update the cost function value for each walker
+            # Update the cost function value for each walker
             F[i] = self.evaluate(np.expand_dims(X[i], 0))
 
-            # update counters of succesul walk moves
+            # Update counters of succesul walk moves
             self.counts[winner] += (1 if F[i]<self.fbest else 0)                
         return X, F
 
@@ -525,7 +525,8 @@ class FLW_Real():
         """
         if self.hist:
             plt.plot(self.fmins)
-            plt.ylim(min(0, self.fbest), np.mean(self.fmins))#top=.000001)
+            plt.ylim(min(0, self.fbest), np.mean(self.fmins))
+            plt.title("fbest plot (problem: %s)" % self.fcost.__name__)
             plt.show()
         else:
             print("Sorry, history was not enabled, data unavailable.")
